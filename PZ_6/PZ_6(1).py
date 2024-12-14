@@ -19,7 +19,7 @@ def possitive(A):
                 result.append(A[left])
                 left += 1
         else:
-            # Берём до двух элементов сзади
+            # Берём до двух элементов сзади.
             if left <= right:
                 result.append(A[right])
                 right -= 1
