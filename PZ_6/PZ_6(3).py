@@ -3,55 +3,46 @@
 # (при этом A1 перейдет в AK+1, A2 — в AK+2, ..., AN — в AK).
 # Допускается использовать вспомогательный список из 4 элементов.
 
-def possitive(A, K):
-    N = len(A)
+def possitive(A):
+    n = len(A)
+    result = []
+    left = 0
+    right = n - 1
+    secret = True
 
-    # Проверка на корректность
-    if K < 1 or K >= 4 or K >= N:
-        return None  # Возвращаем None при некорректном K
+    while left <= right:
+        if secret:
+            # Берём до двух элементов спереди
+            if left <= right:
+                result.append(A[left])
+                left += 1
+            if left <= right:
+                result.append(A[left])
+                left += 1
+        else:
+            # Берём до двух элементов сзади
+            if left <= right:
+                result.append(A[right])
+                right -= 1
+            if left <= right:
+                result.append(A[right])
+                right -= 1
+        secret = not secret
 
-    # Вспомогательный список для хранения последних K элементов
-    aux = [0] * K
-
-
-    for i in range(K):
-        aux[i] = A[N - K + i]
-
-    # Сдвиг элемента вправо
-    for j in range(N - 1, K - 1, -1):
-        A[j] = A[j - K]
-
-    # Копируем последние K элементов в начало списка
-    for i in range(K):
-        A[i] = aux[i]
-
-    return A
-
-
-N = input("Введите размер списка N: ")
-A = []
+    return result
 
 try:
-    N = int(N)
+    N = int(input("Введите размер списка N: "))
     if N <= 0:
         print("Ошибка: Размер списка должен быть положительным целым числом.")
     else:
-        # Заполнение списка A
+        A = []
         for i in range(N):
             value = int(input(f"Введите элемент A[{i + 1}]: "))
             A.append(value)
 
-        K = input("Введите значение K (1 < K < 4, K < N): ")
-        K = int(K)
-
-        # Выполнение циклического сдвига
-        result = possitive(A, K)
-
-        if result is None:
-            print("Ошибка: Неверное значение K. Убедитесь, что 1 < K < 4 и K < N.")
-        else:
-            # Вывод результата
-            print("Список после циклического сдвига:", result)
-
+        box = possitive(A)
+        print("Элементы списка в новом порядке:")
+        print(box)
 except ValueError:
-    print("Ошибка: Пожалуйста, введите допустимые целые числа.")
+    print("Ошибка: Пожалуйста, введите целое число.")
