@@ -3,19 +3,18 @@
 # полученные суммы.
 import random
 
-rows = int(input("Количество строк"))
-cols = int(input("Количество столбцов"))
+rows = int(input("Количество строк: "))
+cols = int(input("Количество столбцов: "))
 
 matrix = []
 for i in range(rows):
-    row = [random.randint(1, 9) for _ in range(cols)]
+    row = [random.randint(1, 5) for _ in range(cols)]
     matrix.append(row)
 
 print("\nИсходная матрица:")
 for row in matrix:
     print(row)
 
-# Считаем суммы строк
 sums = [sum(row) for row in matrix]
 
 for i in range(rows):

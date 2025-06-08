@@ -1,15 +1,17 @@
 #В двумерном списке найти сумму элементов второй половины матрицы.
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [10, 11, 12]
-]
+import random
+
+
+rows = int(input("Введите количество строк: "))
+cols = int(input("Введите количество столбцов: "))
+
+matrix = [[random.randint(1, 10) for _ in range(cols)] for _ in range(rows)]
+print("\nСгенерированная матрица:")
+
+for row in matrix:
+    print(row)
 
 half = len(matrix) // 2
-
 second_half = matrix[half:]
-
-total = sum(sum(row) for row in second_half)
-
-print(total)
+total = sum(map(sum, second_half))
+print(f"\nСумма элементов второй половины матрицы: {total}")
